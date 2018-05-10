@@ -1,0 +1,32 @@
+<%= form_with(model: friend_request, local: true) do |form| %>
+  <% if friend_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(friend_request.errors.count, "error") %> prohibited this friend_request from being saved:</h2>
+
+      <ul>
+      <% friend_request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :sender_id %>
+    <%= form.number_field :sender_id, id: :friend_request_sender_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :receiver_id %>
+    <%= form.number_field :receiver_id, id: :friend_request_receiver_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status_id %>
+    <%= form.number_field :status_id, id: :friend_request_status_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
