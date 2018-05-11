@@ -1,16 +1,20 @@
-<%@post = post %>
-<p id="notice"><%= notice %></p>
 
-<div class="form-group">
-  <strong>Title:</strong>
-  <%= @post.title %>
-</div>
+<%posts.each do |post|%>
 
-<div class="form-group">
-  <strong>Text:</strong>
-  <%= @post.text %>
-</div>
+  <div class="form-group">
+    <strong>Title:</strong>
+    <%= post.title %>
+  </div>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', {controller: "users", action: "show"} %> |
-<%= link_to 'New Post', new_post_path %>
+  <div class="form-group">
+    <strong>Text:</strong>
+    <%= post.text %>
+  </div>
+
+  <%= render partial: 'partials/show_comment',locals: {comments: post.comments} %>
+  <%= render partial: 'partials/comment', locals: {post: post} %>
+  <%= link_to 'Edit', edit_post_path(post) %> |
+  <%= link_to 'Back', {controller: "users", action: "show"} %> |
+  <%= link_to 'New Post', new_post_path %>
+
+<% end %>

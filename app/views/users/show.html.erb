@@ -19,39 +19,40 @@
         <% end %>
       </ul>
         <div class="form-group">
-          <!--<input type="text" class="form-control" placeholder="Search Friends">-->
           <%= form_tag(search_path, {:method => "get"}) do %>
             <%= text_field_tag :search, params[:search], placeholder: "Search Friends" %>
             <%= submit_tag "Search Friends" %>
           <% end %>
         </div>
-        <!--<button type="submit" class="btn btn-default">Send Friend Request</button>-->
     </div>
   </nav>
   <div class="row">
+
     <div class="col-lg-3", style="background-color: #999999">
       <% if user_signed_in? %>
-        <p>
+        <div class="form-group">
           <strong>UserName:</strong>
           <%= @user.username %>
-        </p>
+        </div>
 
-        <p>
+        <div class="form-group">
           <strong>Email:</strong>
           <%= @user.email %>
-        </p>
+        </div>
       <% else %>
-        <p>Please SignIn</p>
+        <div class="form-group">Please SignIn</div>
       <% end %>
     </div>
+
     <div class="col-lg-6", style="background-color: #DADADA">
       <% if user_signed_in? %>
         <h2>Posts</h2>
-        <%@user.posts.each do |post|%>
-         <%= render partial: 'partials/show_post', locals: {post: post} %>
-        <% end %>
+        <%= render partial: 'partials/show_post', locals: {posts: @user.posts} %>
+      <% else %>
+        <div class="form-group">Please SignIn</div>
       <% end %>
     </div>
+
     <div class="col-lg-3", style="background-color: #999999">
       <% if user_signed_in? %>
         <% @users = User.all %>
@@ -59,9 +60,10 @@
           <%= user.username %><br/>
         <% end %>
       <% else %>
-        <p>Please SignIn</p>
+        <div class="form-group">Please SignIn</div>
       <% end %>
     </div>
+
   </div>
 </div>
 
