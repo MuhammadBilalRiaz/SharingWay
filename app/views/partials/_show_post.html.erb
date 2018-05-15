@@ -1,5 +1,9 @@
-
 <%posts.each do |post|%>
+
+  <div class="form-group">
+    <strong>Post By:</strong>
+    <%= post.user.username %>
+  </div>
 
   <div class="form-group">
     <strong>Title:</strong>

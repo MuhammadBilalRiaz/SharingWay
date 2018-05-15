@@ -20,4 +20,15 @@ class User < ApplicationRecord
     users
   end
 
+
+  def all_posts
+    friends_ids = self.friends.pluck(:id)
+    all_ids = (friends_ids << self.id).uniq
+    posts = Post.where(user_id: all_ids)
+    posts
+  end
+
+
+
+
 end

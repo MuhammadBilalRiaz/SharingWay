@@ -19,26 +19,36 @@
         <% end %>
       </ul>
         <div class="form-group">
-          <%= form_tag(search_path, {:method => "get"}) do %>
+          <%= form_tag(search_path, :method => "get") do %>
             <%= text_field_tag :search, params[:search], placeholder: "Search Friends" %>
-            <%= submit_tag "Search Friends" %>
+            <%= submit_tag "Search Friends", class: "ses_submit_btn" %>
+            <%#= submit_tag 'Go', class: "ses_submit_btn", :onclick => "addCookie()", id: 'testing2'%>
           <% end %>
         </div>
     </div>
   </nav>
-  <div class="row">
+  <div class="row" style="background: cornsilk">
 
-    <div class="col-lg-3", style="background-color: #999999">
-      <% if user_signed_in? %>
-        <div class="form-group">
-          <strong>UserName:</strong>
-          <%= @user.username %>
-        </div>
+    <div class="col-lg-3">
+      <div style="background-color: #999999" class="text-center">
+          <% if user_signed_in? %>
+            <h2>User Profile</h2>
+            <div>
+              <strong>UserName:</strong>
+              <%= @user.username %>
+            </div>
 
-        <div class="form-group">
-          <strong>Email:</strong>
-          <%= @user.email %>
-        </div>
+            <div >
+              <strong>Email:</strong>
+              <%= @user.email %>
+            </div>
+      </div>
+
+      <div style="background-color: aqua" class="text-center">
+          <h3>FriendRequests By Me</h3>
+          <%= render partial: 'partials/show_sent_requests', locals: {sent_requests: FriendRequest.sent_requests(current_user)} %>
+      </div>
+
       <% else %>
         <div class="form-group">Please SignIn</div>
       <% end %>
@@ -47,24 +57,32 @@
     <div class="col-lg-6", style="background-color: #DADADA">
       <% if user_signed_in? %>
         <h2>Posts</h2>
-        <%= render partial: 'partials/show_post', locals: {posts: @user.posts} %>
+        <%= render partial: 'partials/show_post', locals: {posts: @user.all_posts} %>
       <% else %>
         <div class="form-group">Please SignIn</div>
       <% end %>
     </div>
 
-    <div class="col-lg-3", style="background-color: #999999">
+    <div class="col-lg-3">
+
+      <div style="background-color: #999999" class="text-center">
       <% if user_signed_in? %>
-        <% @users = User.all %>
-        <% @users.each do |user| %>
-          <%= user.username %><br/>
-        <% end %>
+        <h2>FriendRequsts</h2>
+        <%= render partial: 'partials/show_friend_requests', locals: {friend_requests: FriendRequest.pending_requests(current_user)} %>
+      </div>
+
+      <div style="background-color: aqua" class="text-center">
+        <h3>Friends</h3>
+        <%= render partial: 'partials/all_friends', locals: {friends: current_user.friends} %>
+      </div>
+
       <% else %>
         <div class="form-group">Please SignIn</div>
       <% end %>
     </div>
-
   </div>
 </div>
+
+
 
 

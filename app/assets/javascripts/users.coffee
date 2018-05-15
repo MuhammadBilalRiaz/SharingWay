@@ -1,3 +1,20 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
+#jQuery ->
+#  $('#search').autocomplete
+#  source: "/users#search"
+#
+# $ ->
+#  $("users_search").click ->
+#    $.ajax({
+#      type: "GET",
+#      url: "/users",
+#      data: { User:{ } },
+#      success:(data) ->
+#        alert data.id
+#        return false
+#      error:(data) ->
+#        return false
+#    })

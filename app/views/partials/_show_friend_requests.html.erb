@@ -1,0 +1,8 @@
+<% friend_requests.each do |request| %>
+  <%= request.sender.username %><br/>
+  <%#= link_to 'Accept', {controller: "friend_requests", action: "update", friend_request: { sender_id: request.sender_id, status_id: 'accepted'}}, method: 'put'%>
+  <%#= link_to 'Reject', {controller: "friend_requests", action: "update", friend_request: { sender_id: request.sender_id, status_id: 'rejected'}}, method: 'put'%>
+
+  <%= link_to 'Accept', friend_request_path(request.sender_id,status_id:"accepted"), method: 'put'%>
+  <%= link_to 'Reject', friend_request_path(request.sender_id,status_id: "rejected"), method: 'put'%>
+<% end %>
